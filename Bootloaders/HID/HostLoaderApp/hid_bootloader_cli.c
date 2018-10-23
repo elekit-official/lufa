@@ -46,6 +46,8 @@ void usage(void)
 	fprintf(stderr, "\t-r : Use hard reboot if device not online\n");
 	fprintf(stderr, "\t-n : No reboot after programming\n");
 	fprintf(stderr, "\t-v : Verbose output\n");
+	fprintf(stderr, "\t-s : Report hex size\n");
+	fprintf(stderr, "\t-f : Report if target device is connected or not\n");
 	fprintf(stderr, "\n<MCU> = atmegaXXuY or at90usbXXXY");
 
 	fprintf(stderr, "\nFor support and more information, please visit:\n");
@@ -78,7 +80,10 @@ int wait_for_device_to_appear = 0;
 int hard_reboot_device = 0;
 int reboot_after_programming = 1;
 int verbose = 0;
+int find_usb_device = 0;
+int report_hex_size = 0;
 int code_size = 0, block_size = 0;
+int PID = 0, VID = 0;
 const char *filename=NULL;
 
 
@@ -95,6 +100,23 @@ int main(int argc, char **argv)
 
 	// parse command line arguments
 	parse_options(argc, argv);
+
+	printf_verbose("Teensy Loader, Command Line, EK-MOD Version 1.0.0\n");
+
+	if(!PID || !VID){
+	  fprintf(stderr, "PID && VID must be provided.\n");
+	  exit(1);
+	}
+
+	if(teensy_open() && find_usb_device){
+	  printf_verbose("Find target device.(VID:%04x,PID:%04x)\n", VID, PID);
+	  return 0;
+	}else if(!teensy_open() && find_usb_device){
+	  printf_verbose("Can't find target device.(VID:%04x,PID:%04x)\n", VID, PID);
+	  exit(1);
+	}
+
+
 	if (!filename) {
 		fprintf(stderr, "Filename must be specified\n\n");
 		usage();
@@ -103,12 +125,18 @@ int main(int argc, char **argv)
 		fprintf(stderr, "MCU type must be specified\n\n");
 		usage();
 	}
-	printf_verbose("Teensy Loader, Command Line, Version 2.0\n");
+
+
 
 	// read the intel hex file
 	// this is done first so any error is reported before using USB
 	num = read_intel_hex(filename);
 	if (num < 0) die("error reading intel hex file \"%s\"", filename);
+	if(report_hex_size){
+	  printf_verbose("report hex file size(%d bytes)\n", num);
+	  fprintf(stdout, "%d", num);
+	  return 0;
+	}
 	printf_verbose("Read \"%s\": %d bytes, %.1f%% usage\n",
 		filename, num, (double)num / (double)code_size * 100.0);
 
@@ -249,7 +277,7 @@ static usb_dev_handle *libusb_teensy_handle = NULL;
 int teensy_open(void)
 {
 	teensy_close();
-	libusb_teensy_handle = open_usb_device(0x16C0, 0x0478);
+	libusb_teensy_handle = open_usb_device(VID, PID);
 
 	if (!libusb_teensy_handle)
 		libusb_teensy_handle = open_usb_device(0x03eb, 0x2067);
@@ -400,7 +428,7 @@ static HANDLE win32_teensy_handle = NULL;
 int teensy_open(void)
 {
 	teensy_close();
-	win32_teensy_handle = open_usb_device(0x16C0, 0x0478);
+	win32_teensy_handle = open_usb_device(VID, PID);
 
 	if (!win32_teensy_handle)
 		win32_teensy_handle = open_usb_device(0x03eb, 0x2067);
@@ -585,7 +613,7 @@ static IOHIDDeviceRef iokit_teensy_reference = NULL;
 int teensy_open(void)
 {
 	teensy_close();
-	iokit_teensy_reference = open_usb_device(0x16C0, 0x0478);
+	iokit_teensy_reference = open_usb_device(VID, PID);
 
 	if (!iokit_teensy_reference)
 		iokit_teensy_reference = open_usb_device(0x03eb, 0x2067);
@@ -704,7 +732,7 @@ static int uhid_teensy_fd = -1;
 int teensy_open(void)
 {
 	teensy_close();
-	uhid_teensy_fd = open_usb_device(0x16C0, 0x0478);
+	uhid_teensy_fd = open_usb_device(VID, PID);
 
 	if (uhid_teensy_fd < 0)
 		uhid_teensy_fd = open_usb_device(0x03eb, 0x2067);
@@ -975,7 +1003,19 @@ void parse_options(int argc, char **argv)
 				reboot_after_programming = 0;
 			} else if (strcmp(arg, "-v") == 0) {
 				verbose = 1;
-			} else if (strncmp(arg, "-mmcu=", 6) == 0) {
+			} else if (strcmp(arg, "-f") == 0) {
+				find_usb_device = 1;
+			} else if (strcmp(arg, "-s") == 0) {
+			        report_hex_size = 1;
+			} else if (strncmp(arg, "-pid=", 5) == 0){
+			  arg += 5;
+			  PID = atof(arg);
+			  //			  printf("parse pid:0x%04x\n", PID);
+			} else if (strncmp(arg, "-vid=", 5) == 0){
+			  arg += 5;
+			  VID = atof(arg);
+			  //			  printf("parse vid:0x%04x\n", VID);
+			}else if (strncmp(arg, "-mmcu=", 6) == 0) {
 				arg += 6;
 
 				if (strncmp(arg, "at90usb", 7) == 0) {
