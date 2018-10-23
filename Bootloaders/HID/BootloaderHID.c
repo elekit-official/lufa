@@ -81,12 +81,16 @@ int main(void)
 	/* Enable global interrupts so that the USB stack can function */
 	GlobalInterruptEnable();
 
-	while (RunBootloader)
+	while (RunBootloader){
 	  USB_USBTask();
+	  if(!bit_is_set(PINB,6))
+	    runBootloader = false;
+	}
 
 	/* Disconnect from the host - USB interface will be reset later along with the AVR */
 	USB_Detach();
-
+	DDRC  = 0b00000000;
+	PORTC = 0b00000000;
 	/* Unlock the forced application start mode of the bootloader if it is restarted */
 	MagicBootKey = MAGIC_BOOT_KEY;
 
@@ -99,6 +103,7 @@ int main(void)
 /** Configures all hardware required for the bootloader. */
 static void SetupHardware(void)
 {
+        DDRC = 0b00010000;
 	/* Disable watchdog if enabled by bootloader/fuses */
 	MCUSR &= ~(1 << WDRF);
 	wdt_disable();
@@ -119,8 +124,14 @@ static void SetupHardware(void)
  */
 void EVENT_USB_Device_ConfigurationChanged(void)
 {
-	/* Setup HID Report Endpoint */
-	Endpoint_ConfigureEndpoint(HID_IN_EPADDR, EP_TYPE_INTERRUPT, HID_IN_EPSIZE, 1);
+  /* Setup HID Report Endpoint */
+  if(Endpoint_ConfigureEndpoint(HID_IN_EPADDR, EP_TYPE_INTERRUPT, HID_IN_EPSIZE, 1)) {
+    PORTC = 0b00010000; //PC4 HIGH
+  };
+}
+
+void EVENT_USB_Device_Disconnect(void){
+  PORTC = 0b00000000; //PORTC ALL LOW
 }
 
 /** Event handler for the USB_ControlRequest event. This is used to catch and process control requests sent to
