@@ -84,7 +84,7 @@ int main(void)
 	while (RunBootloader){
 	  USB_USBTask();
 	  if(!bit_is_set(PINB,6))
-	    runBootloader = false;
+	    RunBootloader = false;
 	}
 
 	/* Disconnect from the host - USB interface will be reset later along with the AVR */
