@@ -76,7 +76,7 @@ const USB_Descriptor_Device_t DeviceDescriptor =
 	//.VendorID               = 0x03EB,
 	//.ProductID              = 0x2067,
 	.VendorID               = 0x2EF7,
-	.ProductID              = 0x0103,
+	.ProductID              = 0x0105,
 	.ReleaseNumber          = VERSION_BCD(0,0,1),
 
 	.ManufacturerStrIndex   = NO_DESCRIPTOR,

@@ -84,7 +84,7 @@ int main(void)
 	while (RunBootloader){
 	  USB_USBTask();
 	  if(!bit_is_set(PINB,6))
-	    runBootloader = false;
+	    RunBootloader = false;
 	}
 
 	/* Wait a short time to end all USB transactions and then disconnect */
