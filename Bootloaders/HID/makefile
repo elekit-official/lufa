@@ -27,7 +27,7 @@ LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET)
 # match the target's total FLASH size and the bootloader size set in the
 # device's fuses.
 FLASH_SIZE_KB        := 8
-BOOT_SECTION_SIZE_KB := 2
+BOOT_SECTION_SIZE_KB := 4
 
 # Bootloader address calculation formulas
 # Do not modify these macros, but rather modify the dependent values above.
