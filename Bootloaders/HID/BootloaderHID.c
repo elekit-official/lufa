@@ -134,14 +134,14 @@ void EVENT_USB_Device_ConfigurationChanged(void)
   }
 }
 
-void EVENT_USB_Device_Connect(void)
-{
+//void EVENT_USB_Device_Connect(void)
+//{
   //PORTC = 0b10000000; //PC7 HIGH
-}
+//}
 
-void EVENT_USB_Device_Disconnect(void){
+//void EVENT_USB_Device_Disconnect(void){
   //PORTC = 0b00000000; //PORTC ALL LOW
-}
+//}
 
 /** Event handler for the USB_ControlRequest event. This is used to catch and process control requests sent to
  *  the device from the USB host before passing along unhandled control requests to the library for processing
