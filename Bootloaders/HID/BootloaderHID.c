@@ -105,7 +105,7 @@ int main(void)
 /** Configures all hardware required for the bootloader. */
 static void SetupHardware(void)
 {
-        DDRC = 0b10000000;
+        DDRC = 0b00100000;
 	/* Disable watchdog if enabled by bootloader/fuses */
 	MCUSR &= ~(1 << WDRF);
 	wdt_disable();
@@ -128,7 +128,7 @@ void EVENT_USB_Device_ConfigurationChanged(void)
 {
   /* Setup HID Report Endpoint */
   if(Endpoint_ConfigureEndpoint(HID_IN_EPADDR, EP_TYPE_INTERRUPT, HID_IN_EPSIZE, 1)){
-    PORTC = 0b10000000; //PC7 HIGH
+    PORTC = 0b00100000; //PC5 HIGH
   }else{
     PORTC = 0b00000000; 
   }
