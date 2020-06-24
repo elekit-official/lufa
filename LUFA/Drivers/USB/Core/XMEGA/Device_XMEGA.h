@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -80,7 +80,7 @@
 	/* Public Interface - May be used in end-application: */
 		/* Macros: */
 			/** \name USB Device Mode Option Masks */
-			//@{
+			/**@{*/
 			/** Mask for the Options parameter of the \ref USB_Init() function. This indicates that the
 			 *  USB interface should be initialized in low speed (1.5Mb/s) mode.
 			 *
@@ -98,7 +98,7 @@
 				 */
 				#define USB_DEVICE_OPT_FULLSPEED   (0 << 0)
 			#endif
-			//@}
+			/**@}*/
 
 			#if (!defined(NO_INTERNAL_SERIAL) || defined(__DOXYGEN__))
 				/** String descriptor index for the device's unique serial number string descriptor within the device.

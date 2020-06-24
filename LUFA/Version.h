@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -43,7 +43,7 @@
 	/* Public Interface - May be used in end-application: */
 		/* Macros: */
 			/** \name LUFA Release Type Constants */
-			//@{
+			/**@{*/
 				/** Constant for \ref LUFA_VERSION_RELEASE_TYPE indicating a development release. */
 				#define LUFA_VERSION_RELEASE_TYPE_DEVELOPMENT   0
 
@@ -52,7 +52,7 @@
 
 				/** Constant for \ref LUFA_VERSION_RELEASE_TYPE indicating a full official release. */
 				#define LUFA_VERSION_RELEASE_TYPE_FULL          2
-			//@}
+			/**@}*/
 
 			/** Indicates the version number of the library, as an integer. \note This value is only updates in non-development releases. */
 			#define LUFA_VERSION_INTEGER              0x170418
@@ -61,7 +61,7 @@
 			#define LUFA_VERSION_STRING               "170418"
 
 			/** Indicates the release type of the library. */
-			#define LUFA_VERSION_RELEASE_TYPE         LUFA_VERSION_RELEASE_TYPE_FULL
+			#define LUFA_VERSION_RELEASE_TYPE         LUFA_VERSION_RELEASE_TYPE_DEVELOPMENT
 
 #endif
 

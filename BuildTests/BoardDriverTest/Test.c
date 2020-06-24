@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -53,7 +53,7 @@
 
 int main(void)
 {
-	uint_reg_t Dummy;
+	uint_reg_t Dummy = 0;
 
 	/* =============================
 	 *     Buttons Compile Check

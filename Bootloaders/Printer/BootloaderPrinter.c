@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -67,7 +67,7 @@ USB_ClassInfo_PRNT_Device_t TextOnly_Printer_Interface =
 /** Intel HEX parser state machine state information, to track the contents of
  *  a HEX file streamed in as a sequence of arbitrary bytes.
  */
-struct
+static struct
 {
 	/** Current HEX parser state machine state. */
 	uint8_t  ParserState;
@@ -87,11 +87,11 @@ struct
 	/** Checksum of the current record received so far. */
 	uint8_t  Checksum;
 	/** Starting address of the last addressed FLASH page. */
-	uint32_t PageStartAddress;
+	flashaddr_t PageStartAddress;
 	/** Current 32-bit byte extended base address in FLASH being targeted. */
-	uint32_t CurrBaseAddress;
+	flashaddr_t CurrBaseAddress;
 	/** Current 32-bit byte address in FLASH being targeted. */
-	uint32_t CurrAddress;
+	flashaddr_t CurrAddress;
 } HEXParser;
 
 /** Indicates if there is data waiting to be written to a physical page of

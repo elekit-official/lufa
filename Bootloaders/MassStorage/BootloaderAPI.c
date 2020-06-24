@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -35,10 +35,15 @@
 
 #include "BootloaderAPI.h"
 
-static bool IsPageAddressValid(const uint32_t Address)
+bool IsPageAddressValid(const uint32_t Address)
 {
 	/* Determine if the given page address is correctly aligned to the
-	   start of a flash page. */
+	   start of a flash page.
+
+	   Note that this is not static, as we need to force it into the
+	   AUX_BOOT_SECTION on small flash devices to save space.
+	*/
+
 	bool PageAddressIsAligned = !(Address & (SPM_PAGESIZE - 1));
 
 	return (Address < BOOT_START_ADDR) && PageAddressIsAligned;

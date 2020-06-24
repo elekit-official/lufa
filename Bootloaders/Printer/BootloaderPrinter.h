@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -73,6 +73,13 @@
 
 		/** Magic bootloader key to unlock forced application start mode. */
 		#define MAGIC_BOOT_KEY             0xDC42
+
+	/* Type Defines: */
+		#if (FLASHEND > 0xFFFF)
+			typedef uint32_t flashaddr_t;
+		#else
+			typedef uint16_t flashaddr_t;
+		#endif
 
 	/* Enums: */
 		/** Intel HEX parser state machine states. */

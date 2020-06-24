@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -52,6 +52,8 @@
 		#endif
 
 	/* Function Prototypes: */
+		bool	IsPageAddressValid(const uint32_t Address) AUX_BOOT_SECTION ATTR_NO_INLINE;
+
 		void    BootloaderAPI_ErasePage(const uint32_t Address);
 		void    BootloaderAPI_WritePage(const uint32_t Address);
 		void    BootloaderAPI_FillWord(const uint32_t Address, const uint16_t Word);

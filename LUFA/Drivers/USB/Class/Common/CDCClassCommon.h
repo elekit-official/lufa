@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -65,7 +65,7 @@
 
 	/* Macros: */
 		/** \name Virtual Control Line Masks */
-		//@{
+		/**@{*/
 		/** Mask for the DTR handshake line for use with the \ref CDC_REQ_SetControlLineState class-specific request
 		 *  from the host, to indicate that the DTR line state should be high.
 		 */
@@ -110,7 +110,7 @@
 		 *  to indicate that a data overrun error has occurred on the virtual serial port.
 		 */
 		#define CDC_CONTROL_LINE_IN_OVERRUNERROR (1 << 6)
-		//@}
+		/**@}*/
 
 	/* Enums: */
 		/** Enum for possible Class, Subclass and Protocol values of device and interface descriptors relating to the CDC

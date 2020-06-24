@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -126,7 +126,7 @@
 		   (uint8_t)(ROT8(ROT8(ROT8(ROT8(ROT8(ROT8(ROT8(ROT8(ROT8(ROT8(n0)+n1)+n2)+n3)+n4)+n5)+n6)+n7)+e0)+e1)+e2)
 
 		/** \name FAT Filesystem Flags */
-		//@{
+		/**@{*/
 		/** FAT attribute flag to indicate a read-only file. */
 		#define FAT_FLAG_READONLY         (1 << 0)
 
@@ -150,7 +150,7 @@
 
 		/** Ordinal flag marker for FAT Long File Name entries to mark the last entry. */
 		#define FAT_ORDINAL_LAST_ENTRY    (1 << 6)
-		//@}
+		/**@}*/
 
 	/* Enums: */
 		/** Enum for the Root FAT file entry indexes on the disk. This can be used

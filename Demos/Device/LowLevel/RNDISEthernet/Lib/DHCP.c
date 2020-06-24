@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2018.
+     Copyright (C) Dean Camera, 2020.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2018  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2020  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -54,8 +54,8 @@ int16_t DHCP_ProcessDHCPPacket(void* IPHeaderInStart,
 	DHCP_Header_t* DHCPHeaderIN  = (DHCP_Header_t*)DHCPHeaderInStart;
 	DHCP_Header_t* DHCPHeaderOUT = (DHCP_Header_t*)DHCPHeaderOutStart;
 
-	uint8_t* DHCPOptionsINStart  = (uint8_t*)(DHCPHeaderInStart  + sizeof(DHCP_Header_t));
-	uint8_t* DHCPOptionsOUTStart = (uint8_t*)(DHCPHeaderOutStart + sizeof(DHCP_Header_t));
+	uint8_t* DHCPOptionsINStart  = ((uint8_t*)DHCPHeaderInStart  + sizeof(DHCP_Header_t));
+	uint8_t* DHCPOptionsOUTStart = ((uint8_t*)DHCPHeaderOutStart + sizeof(DHCP_Header_t));
 
 	DecodeDHCPHeader(DHCPHeaderInStart);
 
